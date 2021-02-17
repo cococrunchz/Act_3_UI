@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -22,32 +23,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         hero lillian = new hero();
         lillian.minDMG =50;
         lillian.maxDMG =80;
-        lillian.HP = 1000;
-        lillian.SP = 500;
-        lillian.next = 0;
+        lillian.HP = 800;
 
         ghost boo = new ghost();
         boo.ghostMinDMG = 90;
         boo.ghostMaxDMG = 100;
         boo.ghostHP = 1000;
-        boo.ghostSP = 0;
 
-        TextView txtHP, txtSP, txtghostHP, txtghostType;
+        TextView txtHP, txtDMG, txtghostHP, txtghostType;
         Button btnAttack;
 
         txtHP = findViewById(R.id.hpDisplay);
-        txtSP = findViewById(R.id.spDisplay);
+        txtDMG = findViewById(R.id.dmgDisplay);
         txtghostHP = findViewById(R.id.ghostHp);
         txtghostType = findViewById(R.id.ghostType);
 
         btnAttack = findViewById(R.id.btnAtk);
 
         txtHP.setText(String.valueOf(lillian.HP));
-        txtSP.setText((lillian.minDMG)+ " ~ "+ (lillian.maxDMG));
+        txtDMG.setText((lillian.minDMG)+ " ~ "+ (lillian.maxDMG));
         txtghostHP.setText(String.valueOf(boo.ghostHP));
         txtghostType.setText("BOO");
+        btnAttack.setText("START");
 
         btnAttack.setOnClickListener(this);
+
+        ImageView lilliasmile = findViewById(R.id.lillia_smile);
+        ImageView lilliasad = findViewById(R.id.lilliasad);
+
+        lilliasmile.setVisibility(View.VISIBLE);
+        lilliasad.setVisibility(View.INVISIBLE);
+
+
     }
     @SuppressLint("SetTextI18n")
     @Override
@@ -62,48 +69,65 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         lillian.minDMG =50;
         lillian.maxDMG =80;
-        lillian.HP = 1000;
-        lillian.next = 0;
-        lillian.turnNumber = 1;
+        lillian.HP = 800;
+
 
         boo.ghostMinDMG = 90;
         boo.ghostMaxDMG = 100;
         boo.ghostHP = 1000;
-        boo.ghostULT = 0.0;
-        boo.turnNumber = 1;
 
-        TextView txtHP, txtSP, txtghostHP;
+
+        TextView txtHP, txtDMG, txtghostHP;
+        Button btnAttack;
+
         txtHP = findViewById(R.id.hpDisplay);
-        txtSP = findViewById(R.id.spDisplay);
+        txtDMG = findViewById(R.id.dmgDisplay);
         txtghostHP = findViewById(R.id.ghostHp);
 
-        lillian.holyspritz = random.nextInt(lillian.maxDMG - lillian.minDMG) + lillian.minDMG;
-        boo.attack = random.nextInt(boo.ghostMaxDMG - boo.ghostMinDMG) + boo.ghostMinDMG;
+        btnAttack = findViewById(R.id.btnAtk);
 
+
+        int holyspritz = random.nextInt(lillian.maxDMG - lillian.minDMG) + lillian.minDMG;
+        int ghostattack = random.nextInt(boo.ghostMaxDMG - boo.ghostMinDMG) + boo.ghostMinDMG;
+
+        ImageView lilliasmile = findViewById(R.id.lillia_smile);
+        ImageView lilliasad = findViewById(R.id.lilliasad);
 
 
         switch (view.getId()){
             case R.id.btnAtk:
 
                 if (turnNumber%2 ==1) {
-                    boo.ghostHP = boo.ghostHP - lillian.holyspritz;
-                    txtmessage.setText("Mister Boo dealt " + lillian.holyspritz + " damage!");
+                    boo.ghostHP = boo.ghostHP - holyspritz;
+                    txtmessage.setText("Mister Boo dealt " + holyspritz + " damage!");
+                    btnAttack.setText("Ghost's turn");
+
+                    lilliasmile.setVisibility(View.VISIBLE);
+                    lilliasad.setVisibility(View.INVISIBLE);
+
                     turnNumber++;
                 }
                 else{
-                    lillian.HP = lillian.HP - boo.attack;
-                    txtmessage.setText("Lilllia dealt " + boo.attack + " damage!");
+                    lillian.HP = lillian.HP - ghostattack;
+                    txtmessage.setText("Lilllia dealt " + ghostattack + " damage!");
+                    btnAttack.setText("Lillia's turn");
+                    lilliasmile.setVisibility(View.INVISIBLE);
+                    lilliasad.setVisibility(View.VISIBLE);
                     turnNumber++;
                 }
                 txtHP.setText(String.valueOf(lillian.HP));
-                txtSP.setText(String.valueOf(lillian.SP));
                 txtghostHP.setText(String.valueOf(boo.ghostHP));
+                txtDMG.setText((lillian.minDMG)+ " ~ "+ (lillian.maxDMG));
 
                 if (lillian.HP <= 0) {
                     txtmessage.setText("The hero was victorious!");
                     txtHP.setText("");
                     txtghostHP.setText("");
-                    txtmessage.setText("Congratulations, You won!");
+                }
+                else if (boo.ghostHP <= 0){
+                    txtmessage.setText("The ghost was victorious!");
+                    txtHP.setText("");
+                    txtghostHP.setText("");
                 }
                 break;
 

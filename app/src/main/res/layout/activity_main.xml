@@ -75,7 +75,7 @@
         app:layout_constraintTop_toTopOf="@+id/hp2" />
 
     <TextView
-        android:id="@+id/spDisplay"
+        android:id="@+id/dmgDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
@@ -110,7 +110,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/lillia_smile"
         android:layout_width="157dp"
         android:layout_height="155dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -125,11 +125,23 @@
         android:id="@+id/imageView3"
         android:layout_width="184dp"
         android:layout_height="320dp"
-        android:layout_marginBottom="332dp"
+        android:layout_marginBottom="316dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ghostred" />
+
+    <ImageView
+        android:id="@+id/lilliasad"
+        android:layout_width="157dp"
+        android:layout_height="155dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.027"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.581"
+        app:srcCompat="@drawable/lilliasad" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

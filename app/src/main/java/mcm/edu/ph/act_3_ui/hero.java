@@ -6,9 +6,9 @@ public class hero {
     int minDMG = 0;
     int maxDMG = 0;
     int next = 0;
-    int DMG = 0;
+    int heroDMG = 0;
     int turnNumber = 1;
 
-    int holyspritz = 0;
+    int holyspritz;
 
 }
